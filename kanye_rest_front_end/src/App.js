@@ -42,7 +42,7 @@ const App = () => {
         <>
             <h1>Kanye Rest</h1>
 
-            <form onSubit={handleNewQuoteSubmit}>
+            <form onSubmit={handleNewQuoteSubmit}>
                 New Quote: <input type="text" onChange={handleNewQuoteChange}/><br/>
                 <input type="submit" value="New Kanye Quote"/>
             </form>
