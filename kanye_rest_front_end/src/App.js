@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = () => {
+
+    //---------- State vars ----------//
+    const [newQuote, setNewQuote] = useState('');
+    const [newQuoteList, setNewQuoteList] = useState([]);
+
+    useEffect(()=>{
+        axios
+            .get('http://localhost:3000/yequotes')
+            .then((response)=>{
+                setNewQuoteList(response.data);
+            });
+    }, []);
+
+
+    //---------- Create ----------//
+    const handleNewQuoteChange = (event) =>{
+        setNewQuote(event.target.value);
+    };
+
+    const handleNewQuoteSubmit = (event) =>{
+        event.preventDefault();
+        axios.post(
+            'http://localhost:3000/yequotes',
+            {
+                quote: newQuote
+            }
+        ).then(()=>{
+            axios
+                .get('http://localhost:3000/yequotes')
+                .then((response)=>{
+                    setNewQuoteList(response.data);
+                });
+        });
+    };
+
+    return(
+        <>
+            <h1>Kanye Rest</h1>
+
+            <form onSubit={handleNewQuoteSubmit}>
+                New Quote: <input type="text" onChange={handleNewQuoteChange}/><br/>
+                <input type="submit" value="New Kanye Quote"/>
+            </form>
+        </>
+
+    );
 }
 
 export default App;
