@@ -78,43 +78,52 @@ const App = () => {
             <h1>Kanye Rest</h1>
 
             <form onSubmit={handleNewQuoteSubmit}>
-                New Quote: <input type="text" onChange={handleNewQuoteChange}/><br/>
-                <input type="submit" value="New Kanye Quote"/>
+                New Quote: <input  type="text" onChange={handleNewQuoteChange}/><br/>
+                <input class="button-primary" type="submit" value="New Kanye Quote"/>
             </form>
 
             <br/>
             <br/>
 
-            <h2>Quotes</h2>
+            <div class="tupperware">
+                <div>
+                <h2>Quotes</h2>
 
 
 
-            {newQuoteList.length > 0 ?
-                <ul>
-                    {
-                        newQuoteList.map((quote) => {
-                            return(
-                                    <li>
-                                        <p>{quote.quote}</p>
-                                        <button onClick={(event)=>{handleDelete(quote)}}>delete
-                                        </button>
+                {newQuoteList.length > 0 ?
+                    <ul>
+                        {
+                            newQuoteList.map((quote) => {
+                                return(
+                                        <li>
+                                            <h3>"{quote.quote}"</h3>
 
-                                        <details>
-                                            <summary>
-                                                Edit Quote
-                                            </summary>
-                                            <form onSubmit={()=>{handleEdit(quote)}}>
-                                                Quote: <input type="text" onChange={handleNewQuoteChange}/>
-                                                <input type="submit" value="Save Change"/>
-                                            </form>
-                                        </details>
-                                    </li>
-                            )
-                        })
-                    }
-                </ul>
-                : <h1>false</h1>}
 
+                                            <details>
+                                                <summary>
+                                                    Edit Quote
+                                                </summary>
+                                                <form onSubmit={()=>{handleEdit(quote)}}>
+                                                    Quote: <input type="text" onChange={handleNewQuoteChange}/>
+                                                    <input type="submit" value="Save Change"/>
+                                                </form>
+                                            </details>
+
+                                            <button onClick={(event)=>{handleDelete(quote)}}>delete
+                                            </button>
+                                        </li>
+                                )
+                            })
+                        }
+                    </ul>
+                    : <h1>false</h1>}
+                </div>
+
+                <div class="kanye">
+                    <img src="https://images.businessoffashion.com/profiles/asset/1797/43897e2e4a6d155d72dd9df352017b546ef9e229.jpeg?auto=format%2Ccompress&crop=top&fit=crop&h=576&w=1024" alt=""/>
+                </div>
+            </div>
 
         </>
 
